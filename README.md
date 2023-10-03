@@ -1,4 +1,4 @@
-## Modified to support latest Scala
+## Modified to support latest Scala (based on https://github.com/allenai/pdffigures2/pull/51)
 
 # PDFFigures 2.0
 PDFFigures 2.0 is a Scala based project built to extract figures, captions, tables and section titles from
