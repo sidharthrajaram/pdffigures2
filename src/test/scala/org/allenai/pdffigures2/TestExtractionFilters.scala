@@ -1,12 +1,12 @@
 package org.allenai.pdffigures2
 
-import org.allenai.common.testkit.UnitSpec
 import org.apache.pdfbox.pdmodel.PDDocument
+import org.scalatest.funsuite.AnyFunSuite
 
 /** These tests verify that figure extraction filters are successfully catching and removing bad
-  * extractions.
-  */
-class TestExtractionFilters extends UnitSpec {
+ * extractions.
+ */
+class TestExtractionFilters extends AnyFunSuite {
   val allowOcr = false
   val detectSectionTitlesFirst = false
   val rebuildParagraphs = true
@@ -21,11 +21,11 @@ class TestExtractionFilters extends UnitSpec {
   )
 
   /** The figures in this paper, "Ephaptic coupling of cortical neurons", violate the system's
-    * assumptions due to their side captions not spanning the entire height of the figure.
-    * The extractor uses the upward proposal, which identifies the yellow header as the figure.
-    * These extractions should be filtered out for being too close to the page boundary.
-    */
-  "Page boundary filter" should "filter out bad extractions" in {
+   * assumptions due to their side captions not spanning the entire height of the figure.
+   * The extractor uses the upward proposal, which identifies the yellow header as the figure.
+   * These extractions should be filtered out for being too close to the page boundary.
+   */
+  test("Page boundary filter should filter out bad extractions") {
     val pdf = PDDocument.load(
       getClass.getClassLoader.getResourceAsStream(
         "test-pdfs/f63cb20759fab2514802c3ef2a743c76bf9dc9f1.pdf"
@@ -36,11 +36,11 @@ class TestExtractionFilters extends UnitSpec {
   }
 
   /** Figure 3 on page 6 of this paper, "Intercellular calcium waves in glia.",
-    * violates the system's assumptions due to its two-column caption format.
-    * The extractor uses the upward proposal, splitting the figure in half.
-    * This extraction should be filtered out for splitting a figure.
-    */
-  "Graphics split filter" should "filter out bad extractions" in {
+   * violates the system's assumptions due to its two-column caption format.
+   * The extractor uses the upward proposal, splitting the figure in half.
+   * This extraction should be filtered out for splitting a figure.
+   */
+  test("Graphics split filter should filter out bad extractions") {
     val pdf = PDDocument.load(
       getClass.getClassLoader.getResourceAsStream(
         "test-pdfs/3a9202f9f176d3377516e3da0866cc19148c033b.pdf"
@@ -51,9 +51,9 @@ class TestExtractionFilters extends UnitSpec {
   }
 
   /** All figures should be extracted for this paper, "Open Information Extraction from the Web".
-    * This ensures that when figures are empty, it's not because figure extraction is broken.
-    */
-  "Figures" should "all be extracted" in {
+   * This ensures that when figures are empty, it's not because figure extraction is broken.
+   */
+  test("Figures should all be extracted") {
     val pdf = PDDocument.load(
       getClass.getClassLoader.getResourceAsStream(
         "test-pdfs/498bb0efad6ec15dd09d941fb309aa18d6df9f5f.pdf"

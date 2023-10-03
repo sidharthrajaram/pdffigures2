@@ -1,3 +1,5 @@
+## Modified to support latest Scala
+
 # PDFFigures 2.0
 PDFFigures 2.0 is a Scala based project built to extract figures, captions, tables and section titles from
 scholarly documents, with a strong focus on documents from the domain of computer science.
